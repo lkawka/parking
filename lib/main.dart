@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:parking/app_state.dart';
 import 'package:parking/back_drop.dart';
+import 'package:parking/screens/map/index.dart';
 
 void main() => runApp(new MyApp());
 
@@ -30,12 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        body: BackdropScaffold(
-          backpanel: Container(color: Colors.green,),
-          body: Container(color: Colors.red),
-        )
-    );
+    return MapScreen();
   }
 
 }
