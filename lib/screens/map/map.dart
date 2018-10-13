@@ -17,18 +17,21 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
 
     var postings = [
-      Posting(title: "Cheap", lat: 52.210741, lng: 21.011951),
-      Posting(title: "Free", lat: 52.226374, lng: 21.000665),
-      Posting(title: "Available", lat: 52.253770, lng: 21.001314),
+      Posting(title: "Cheap", price: 35.0, lat: 52.210741, lng: 21.011951),
+      Posting(title: "Free", price: 0.0, lat: 52.226374, lng: 21.000665),
+      Posting(title: "Available", price: 120.0, lat: 52.253770, lng: 21.001314),
     ];
 
     var markers = <Marker> [];
     for (int i = 0; i < postings.length; i++) {
       markers.add(Marker(
+        height: 35.0,
+        width: 80.0,
         point: LatLng(postings[i].lat, postings[i].lng),
         builder: (context) {
           return MyMarker(
             isHighlighted: _selectedPosting != null && _selectedPosting == i ? true : false,
+            title: postings[i].price.toInt().toString(),
             onTap: () {
               setState(() {
                 _selectedPosting = i;
