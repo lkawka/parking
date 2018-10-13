@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
-import 'package:parking/widgets/marker/index.dart';
 import 'package:parking/models/posting.dart';
+import 'package:parking/widgets/marker/index.dart';
 
 
 class MapScreen extends StatefulWidget {
@@ -65,13 +65,8 @@ class _MapScreenState extends State<MapScreen> {
       ),
     );
 
-    var safeArea = SafeArea(
-      top: false,
-      child: map,
-    );
-
     var scaffold = Scaffold(
-      body: safeArea,
+      body: map,
     );
 
     return scaffold;
