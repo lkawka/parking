@@ -31,19 +31,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        body: BackdropScaffold(
-
-          ///TUTAJ DEJ MAPE
-          backpanel: Container(color: Colors.green,),
-
-            ///TUTAJ JEST BACK DROP
-            body: ListView.builder(
-              itemBuilder: (index, context) {
-                return Text("siema");
-              },
-              itemCount: 30,
-            )
+    return BackdropScaffold(
+      backpanel: MapScreen(),
+        body: ListView.builder(
+          itemBuilder: (index, context) {
+            return Text("siema");
+          },
+          itemCount: 30,
         )
     );
   }
