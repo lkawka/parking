@@ -11,4 +11,5 @@ class AppState extends InheritedWidget {
   bool updateShouldNotify(InheritedWidget oldWidget) {
     return false;
   }
+
 }
