@@ -1,1 +1,1 @@
-export 'map.dart';
+export 'package:parking/screens/map/map.dart';
