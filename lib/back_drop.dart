@@ -74,11 +74,21 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     if (isBackPanelVisible) {
       return GestureDetector(
         onTap: () => _controller.fling(velocity: 1.0),
+        /*onVerticalDragStart: (a) =>
+            _controller.fling(velocity: 1.0),*/
+        onVerticalDragStart: (gesture) {},
+        onVerticalDragUpdate: (gesture) {
+          debugPrint(gesture.delta.dy.toString());
+          gesture.delta.dy > 0
+              ? _controller.fling(velocity: -1.0)
+              : _controller.fling(velocity: 1.0);
+        },
+
         behavior: HitTestBehavior.opaque,
         child: SizedBox.expand(
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.grey.shade200.withOpacity(0.7),
+              //color: Colors.grey.shade200.withOpacity(0.7),
             ),
             child: Center(
               child: SizedBox(
@@ -90,9 +100,16 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
         ),
       );
     } else {
-      return const SizedBox(
-        height: 0.0,
-        width: 0.0,
+      return GestureDetector(
+        child: Container(
+          color: Colors.transparent,
+        ),
+        onVerticalDragStart: (gesture) {},
+        onVerticalDragUpdate: (gesture) {
+          gesture.delta.dy > 0
+              ? _controller.fling(velocity: -1.0)
+              : _controller.fling(velocity: 1.0);
+        },
       );
     }
   }
@@ -103,7 +120,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
         color: Theme.of(context).primaryColor,
         child: widget.backpanel,
       ),
-      onPanUpdate: ontap,
+      onPanDown: ontap,
     );
   }
 
@@ -147,10 +164,11 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
               children: <Widget>[
                 _buildBackPanel(
                   ontap: isTopPanelVisible
-                      ? 1.0
-                      : _controller.fling(
-                          velocity: isTopPanelVisible ? -1.0 : 1.0,
-                        ),
+                      ? (gesture) =>
+                      _controller.fling(
+                        velocity: isTopPanelVisible ? -1.0 : 1.0,
+                      )
+                      : (gesture) {},
                 ),
                 PositionedTransition(
                   rect: getPanelAnimation(constraints),
