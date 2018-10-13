@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parking/app_state.dart';
-import 'package:parking/back_drop.dart';
+import 'package:parking/screens/backdrop/index.dart';
 import 'package:parking/screens/map/index.dart';
 
 void main() => runApp(new MyApp());

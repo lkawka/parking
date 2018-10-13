@@ -142,43 +142,27 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: widget.title,
-        actions: widget.actions,
-        elevation: 0.0,
-        leading: IconButton(
-          icon: AnimatedIcon(
-            icon: AnimatedIcons.close_menu,
-            progress: _controller.view,
-          ),
-          onPressed: () => _controller.fling(
-                velocity: isTopPanelVisible ? -1.0 : 1.0,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          child: Stack(
+            children: <Widget>[
+              _buildBackPanel(
+                ontap: isTopPanelVisible
+                    ? (gesture) =>
+                    _controller.fling(
+                      velocity: -1.0,
+                    )
+                    : (gesture) {},
               ),
-        ),
-      ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return Container(
-            child: Stack(
-              children: <Widget>[
-                _buildBackPanel(
-                  ontap: isTopPanelVisible
-                      ? (gesture) =>
-                      _controller.fling(
-                        velocity: isTopPanelVisible ? -1.0 : 1.0,
-                      )
-                      : (gesture) {},
-                ),
-                PositionedTransition(
-                  rect: getPanelAnimation(constraints),
-                  child: _buildFrontPanel(),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+              PositionedTransition(
+                rect: getPanelAnimation(constraints),
+                child: _buildFrontPanel(),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
