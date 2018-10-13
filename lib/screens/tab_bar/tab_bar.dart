@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:parking/screens/add/index.dart';
 import 'package:parking/screens/backdrop/index.dart';
 import 'package:parking/screens/map/index.dart';
+import 'package:parking/screens/profile/index.dart';
 
 class TabBarScreen extends StatefulWidget {
   @override
@@ -24,14 +25,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
             itemCount: 30,
           )),
       AddScreen(),
-      BackdropScaffold(
-          backpanel: MapScreen(),
-          body: ListView.builder(
-            itemBuilder: (index, context) {
-              return Text("siema");
-            },
-            itemCount: 30,
-          )),
+      ProfileScreen(),
     ];
 
     // Sets icons in task bar to black on iOS

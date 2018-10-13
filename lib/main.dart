@@ -9,10 +9,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppState(
-      child: MaterialApp(
-        //debugShowCheckedModeBanner: true,
-        home: TabBarScreen(),
-      ),
+        child: Theme(
+          data: ThemeData(
+            primaryColor: Colors.redAccent,
+            splashColor: Colors.greenAccent,
+          ),
+          child: MaterialApp(
+            //debugShowCheckedModeBanner: true,
+            home: TabBarScreen(),
+          ),
+        )
     );
   }
 }
