@@ -8,7 +8,7 @@ class RentCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var row = Row(
+    var row1 = Row(
       children: <Widget>[
         Expanded(
           child: Text(
@@ -23,20 +23,42 @@ class RentCell extends StatelessWidget {
       ],
     );
 
+    var row2 = Row(
+      children: <Widget>[
+        Icon(Icons.location_on),
+        Container(width: 5.0,),
+        Expanded(
+          child: Text(posting.location.title, overflow: TextOverflow.ellipsis),
+        )
+      ],
+    );
+
+    var rows = Column(
+      children: <Widget>[
+        row1,
+        Container(height: 5.0),
+        row2,
+      ],
+    );
+
     var cell = Container(
-      height: 50.0,
+      padding: EdgeInsets.only(
+          left: 15.0, right: 15.0, top: 10.0, bottom: 10.0),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(5.0))
       ),
-      child: row,
+      child: rows,
+    );
+
+    var material = Material(
+      child: cell,
     );
 
     var column = Column(
       children: <Widget>[
-        cell,
-        Container(
-          height: 5.0,
-        )
+        material,
+        Container(height: 10.0,)
       ],
     );
 

@@ -150,7 +150,7 @@ class _AddScreenState extends State<AddScreen> {
                         _handleRadioButtons(val);
                       },
                     ),
-                    Text("small"),
+                    Text("Small"),
                     Radio(
                       value: 1,
                       groupValue: _radioValue,
@@ -158,7 +158,7 @@ class _AddScreenState extends State<AddScreen> {
                         _handleRadioButtons(val);
                       },
                     ),
-                    Text("medium"),
+                    Text("Medium"),
                     Radio(
                       value: 2,
                       groupValue: _radioValue,
@@ -166,7 +166,7 @@ class _AddScreenState extends State<AddScreen> {
                         _handleRadioButtons(val);
                       },
                     ),
-                    Text("big"),
+                    Text("Big"),
                   ],
                 ),
               ),

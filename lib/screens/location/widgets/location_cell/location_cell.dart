@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:parking/models/location.dart';
 
 class LocationCell extends StatelessWidget {
-  final Location location;
+  final String title;
 
-  LocationCell({this.location});
+  LocationCell({this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class LocationCell extends StatelessWidget {
         ),
         Expanded(
           child: Text(
-            location.title,
+            title,
             style: TextStyle(fontSize: 17.0),
           ),
         ),
@@ -27,7 +26,7 @@ class LocationCell extends StatelessWidget {
       children: <Widget>[
         row,
         Container(
-          height: 5.0,
+          height: 20.0,
         ),
       ],
     );

@@ -1,6 +1,10 @@
+import 'dart:async';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:parking/models/location.dart';
 import 'package:parking/screens/location/widgets/location_cell/index.dart';
+
 
 class LocationScreen extends StatefulWidget {
   @override
@@ -8,36 +12,64 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-  var _locations = <Location>[
-    Location(title: "Batorego 29, Warszawa", lat: 52.210777, lng: 21.011922),
-    Location(title: "Startberry, Grochowska 306/308, Warszawa",
-        lat: 52.210777,
-        lng: 21.011922)
-  ];
 
-  List<Location> _filteredLocations;
+  final dio = new Dio(); // for http requests
 
+  List<dynamic> _preds = [];
+
+  _searchForPlaces(term) async {
+    final response = await dio.get(
+        "https://maps.googleapis.com/maps/api/place/autocomplete/json", data: {
+      "input": term,
+      "inputtype": "textquery",
+      "key": "AIzaSyBi_rXSpXeG1RTBl2NXvByFarErfddx5v0",
+      "radius": 20,
+      "location": [52.228601, 21.011511],
+    });
+
+    Map<String, dynamic> data = response.data;
+    List<dynamic> preds = data["predictions"];
+
+    if (preds != _preds) {
+      setState(() {
+        _preds = preds;
+      });
+    }
+  }
+
+  Future<Location> _getDetails(pred) async {
+    print("pred: $pred");
+    final response = await dio.get(
+        "https://maps.googleapis.com/maps/api/place/details/json", data: {
+      "key": "AIzaSyBi_rXSpXeG1RTBl2NXvByFarErfddx5v0",
+      "placeid": pred["place_id"],
+    });
+
+    var data = response.data;
+    print("detail: $data");
+    var location = Location(
+        title: pred["description"],
+        lat: data["result"]["geometry"]["location"]["lat"],
+        lng: data["result"]["geometry"]["location"]["lng"]
+    );
+
+    return location;
+  }
 
   @override
   Widget build(BuildContext context) {
     var cells = <Widget>[];
-    if (_filteredLocations == null) {
-      _locations.forEach((location) =>
-          cells.add(GestureDetector(
-              onTap: () {
-                Navigator.pop(context, location);
-              },
-              child: LocationCell(location: location,)),
-          ),);
-    } else {
-      _filteredLocations.forEach((location) =>
-          cells.add(GestureDetector(
-              onTap: () {
-                Navigator.pop(context, location);
-              },
-              child: LocationCell(location: location,)),
-          ),);
-    }
+
+    _preds.forEach((pred) =>
+        cells.add(GestureDetector(
+          onTap: () async {
+            Location location = await _getDetails(pred);
+            Navigator.pop(context, location);
+          },
+          child: LocationCell(title: pred["description"]),
+        )));
+
+    cells.insert(0, Container(height: 15.0));
 
     var listView = ListView(
       children: cells,
@@ -49,6 +81,7 @@ class _LocationScreenState extends State<LocationScreen> {
     );
 
     var textField = TextField(
+      style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
           hintText: "Search for location...",
           hintStyle: TextStyle(color: Colors.white70),
@@ -56,22 +89,8 @@ class _LocationScreenState extends State<LocationScreen> {
           border: InputBorder.none
       ),
       onChanged: (val) {
-        print("val: $val");
-        if (val == null || val.length == 0) {
-          if (_filteredLocations != null) {
-            setState(() {
-              _filteredLocations = null;
-            });
-          }
-        } else {
-          var filtered = _locations.where((location) =>
-              location.title.toLowerCase().contains(val.toLowerCase()));
-          if (filtered != _filteredLocations) {
-            setState(() {
-              _filteredLocations = filtered;
-            });
-          }
-        }
+        print("changed: $val");
+        _searchForPlaces(val);
       },
     );
 
