@@ -9,7 +9,9 @@ class Posting {
 
   Location location;
 
-  Posting({this.title, this.price, this.location});
+  String type; //SMALL, MEDIUM or BIG
+
+  Posting({this.title, this.price, this.location, this.type});
 
   Posting.fromSnapshot(DataSnapshot snapshot)
       : key = snapshot.key,
@@ -32,3 +34,4 @@ class Posting {
   }
 
 }
+

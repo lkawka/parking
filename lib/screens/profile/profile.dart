@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:parking/app_state.dart';
 import 'package:parking/models/location.dart';
 import 'package:parking/models/posting.dart';
+import 'package:parking/screens/posted_details/index.dart';
 import 'package:parking/screens/profile/widgets/rent_cell/index.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -67,30 +69,57 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget postedTab() {
-    var postings = <Posting>[
-      Posting(title: "Cheap",
-          price: 35.0,
-          location: Location(title: "loc1", lat: 52.210741, lng: 21.011951)),
-      Posting(title: "Free",
-          price: 0.0,
-          location: Location(title: "loc2", lat: 52.226374, lng: 21.000665)),
-      Posting(title: "Available",
-          price: 120.0,
-          location: Location(title: "loc3", lat: 52.253770, lng: 21.001314)),
-    ];
+    AppState appState = AppState.of(context);
 
-    var cells = <Widget>[];
-    postings.forEach((posting) => cells.add(RentCell(posting)));
+    var stream = StreamBuilder(
+        stream: appState.parkSpotManager.active,
+        builder: (context, snapshot) {
+//          var postings = <Posting>[
+//            Posting(title: "Cheap",
+//                price: 35.0,
+//                location: Location(title: "loc1", lat: 52.210741, lng: 21.011951)),
+//            Posting(title: "Free",
+//                price: 0.0,
+//                location: Location(title: "loc2", lat: 52.226374, lng: 21.000665)),
+//            Posting(title: "Available",
+//                price: 120.0,
+//                location: Location(title: "loc3", lat: 52.253770, lng: 21.001314)),
+//          ];
 
-    var listView = ListView(
-      children: cells,
+          List<Posting> postings = snapshot.data;
+          if (postings == null) {
+            postings = [];
+          }
+
+          var cells = <Widget>[];
+          postings.forEach((posting) =>
+              cells.add(GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) {
+                            return PostedDetails();
+                          }
+                      )
+                  );
+                },
+                child: RentCell(posting),
+              )));
+
+          var listView = ListView(
+            children: cells,
+          );
+
+          var container = Container(
+            padding: EdgeInsets.all(15.0),
+            child: listView,
+          );
+
+          return container;
+        }
     );
 
-    var container = Container(
-      padding: EdgeInsets.all(15.0),
-      child: listView,
-    );
-
-    return container;
+    return stream;
   }
 }
