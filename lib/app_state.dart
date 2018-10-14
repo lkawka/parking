@@ -49,7 +49,7 @@ class ParkSpotManager {
   );
 
   Stream<int> get selected => _selectedController.stream;
-  final _selectedController = BehaviorSubject<int>(seedValue: null);
+  final _selectedController = BehaviorSubject<int>(seedValue: -1);
 
   ParkSpotManager({this.reference}) {
     reference.onChildAdded.listen(

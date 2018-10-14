@@ -39,7 +39,7 @@ class InfoDetailsState extends State<InfoDetails> {
     });
     return Container(
       padding: EdgeInsets.only(
-          top: 20.0, left: 24.0, right: 24.0, bottom: 16.0),
+          top: 20.0, left: 12.0, right: 12.0, bottom: 16.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10.0), topRight: Radius.circular(10.0)),

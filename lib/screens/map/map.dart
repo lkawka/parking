@@ -22,32 +22,34 @@ class _MapScreenState extends State<MapScreen> {
 
     getMarkers(List<Posting> postings) {
       var markers = <Marker>[];
-
-      for (int i = 0; i < postings.length; i++) {
-        markers.add(Marker(
-            height: 35.0,
-            width: 80.0,
-            point: LatLng(postings[i].location.lat, postings[i].location.lng),
-            builder: (context) {
-              return MyMarker(
-                isHighlighted: _selectedPosting != null && _selectedPosting == i
-                    ? true
-                    : false,
-                posting: postings[i],
-                onTap: () {
-                  setState(() {
-                    _selectedPosting = i;
-                    AppState
-                        .of(context)
-                        .parkSpotManager
-                        .changeSelected(i);
-                  });
-                },
-              );
-            }
-        ));
+      if (postings != null) {
+        for (int i = 0; i < postings.length; i++) {
+          markers.add(Marker(
+              height: 35.0,
+              width: 80.0,
+              point: LatLng(postings[i].location.lat, postings[i].location.lng),
+              builder: (context) {
+                return MyMarker(
+                  isHighlighted: _selectedPosting != null &&
+                      _selectedPosting == i
+                      ? true
+                      : false,
+                  posting: postings[i],
+                  onTap: () {
+                    setState(() {
+                      _selectedPosting = i;
+                      AppState
+                          .of(context)
+                          .parkSpotManager
+                          .changeSelected(i);
+                    });
+                  },
+                );
+              }
+          ));
+        }
       }
-
+      if (markers == null) debugPrint("siema");
       return markers;
 
     }

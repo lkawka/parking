@@ -29,11 +29,15 @@ class _TabBarScreenState extends State<TabBarScreen> {
                 .selected,
             builder: (context, snapshot) {
               AppState appState = AppState.of(context);
-              return snapshot.data == -1
-                  ? Container(color: Colors.transparent,)
-                  : InfoDetails(
-                  posting: appState.parkSpotManager.parkSpotList[snapshot
-                      .data]);
+              if (snapshot.data != null && snapshot.data > -1 &&
+                  appState.parkSpotManager.parkSpotList.length >
+                      snapshot.data) {
+                return InfoDetails(
+                    posting: appState.parkSpotManager.parkSpotList[snapshot
+                        .data]);
+              } else {
+                return Container();
+              }
             }
         ),
       ),
