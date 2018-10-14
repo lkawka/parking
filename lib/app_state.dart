@@ -71,4 +71,8 @@ class ParkSpotManager {
     _selectedController.add(i);
   }
 
+  updateParking(Posting p) {
+    reference.child(p.key.toString()).set(p.toJson());
+  }
+
 }

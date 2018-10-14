@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:parking/app_state.dart';
 import 'package:parking/screens/add/index.dart';
 import 'package:parking/screens/backdrop/index.dart';
 import 'package:parking/screens/map/index.dart';
 import 'package:parking/screens/profile/index.dart';
 import 'package:parking/widgets/info_details/index.dart';
+import 'package:parking/widgets/info_details/info_details.dart';
 
 class TabBarScreen extends StatefulWidget {
   @override
@@ -18,8 +20,22 @@ class _TabBarScreenState extends State<TabBarScreen> {
   Widget build(BuildContext context) {
     var screens = [
       BackdropScaffold(
-          backpanel: MapScreen(),
-        body: InfoDetails(),
+        headerHeight: 0.0,
+        backpanel: MapScreen(),
+        body: StreamBuilder(
+            stream: AppState
+                .of(context)
+                .parkSpotManager
+                .selected,
+            builder: (context, snapshot) {
+              AppState appState = AppState.of(context);
+              return snapshot.data == -1
+                  ? Container(color: Colors.transparent,)
+                  : InfoDetails(
+                  posting: appState.parkSpotManager.parkSpotList[snapshot
+                      .data]);
+            }
+        ),
       ),
       AddScreen(),
       ProfileScreen(),

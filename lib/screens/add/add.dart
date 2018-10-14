@@ -54,7 +54,8 @@ class _AddScreenState extends State<AddScreen> {
         title: _title,
         price: _price,
         location: _location,
-        type: type
+      type: type,
+      ocupiedList: Occupied(),
     );
 
     state.parkSpotManager.postNewPosting(posting);

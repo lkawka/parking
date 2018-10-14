@@ -67,7 +67,10 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     return RelativeRectTween(
       begin: RelativeRect.fromLTRB(0.0, backPanelHeight, 0.0, frontPanelHeight),
       end: RelativeRect.fromLTRB(
-          0.0, MediaQuery.of(context).size.height / 2, 0.0, 0.0),
+          0.0, MediaQuery
+          .of(context)
+          .size
+          .height / 1.7, 0.0, 0.0),
     ).animate(new CurvedAnimation(parent: _controller, curve: Curves.linear));
   }
 
@@ -103,7 +106,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     } else {
       return GestureDetector(
         child: Container(
-          color: Colors.transparent,
+          //color: Colors.transparent,
         ),
         onVerticalDragStart: (gesture) {},
         onVerticalDragUpdate: (gesture) {
