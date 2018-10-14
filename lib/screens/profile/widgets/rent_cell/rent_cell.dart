@@ -41,14 +41,34 @@ class RentCell extends StatelessWidget {
       ],
     );
 
+    Image image = Image.asset("assets/car.png", scale: 1.8,);
+    switch (posting.type) {
+      case "BIG":
+        image = Image.asset("assets/truck.png", scale: 1.8,);
+        break;
+      case "MEDIUM":
+        image = Image.asset("assets/trailer.png", scale: 1.8,);
+        break;
+    }
+
+    var superRow = Row(
+      children: <Widget>[
+        image,
+        Container(width: 10.0,),
+        Expanded(
+          child: rows,
+        )
+      ],
+    );
+
     var cell = Container(
       padding: EdgeInsets.only(
-          left: 15.0, right: 15.0, top: 10.0, bottom: 10.0),
+          left: 10.0, right: 10.0, top: 10.0, bottom: 10.0),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(5.0))
       ),
-      child: rows,
+      child: superRow,
     );
 
     var material = Material(

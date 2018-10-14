@@ -19,6 +19,7 @@ class Posting {
       : key = snapshot.key,
         title = snapshot.value["title"],
         price = double.tryParse(snapshot.value["price"].toString()),
+        type = snapshot.value["type"],
         location = Location(
           title: snapshot.value["locationTitle"],
           lat: snapshot.value["lat"],
@@ -29,6 +30,7 @@ class Posting {
     return {
       "title": title,
       "price": price,
+      "type": type,
       "locationTitle": location.title,
       "lat": location.lat,
       "lng": location.lng,

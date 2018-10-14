@@ -51,9 +51,9 @@ class _AddScreenState extends State<AddScreen> {
     }
 
     var posting = Posting(
-        title: _title,
-        price: _price,
-        location: _location,
+      title: _title,
+      price: _price,
+      location: _location,
       type: type,
       ocupiedList: Occupied(),
     );
