@@ -12,7 +12,9 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+
   int _selectedPosting;
+  var whereToZoom = LatLng(52.229651, 21.012187);
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,10 @@ class _MapScreenState extends State<MapScreen> {
                 onTap: () {
                   setState(() {
                     _selectedPosting = i;
+                    AppState
+                        .of(context)
+                        .parkSpotManager
+                        .changeSelected(i);
                   });
                 },
               );
@@ -46,14 +52,13 @@ class _MapScreenState extends State<MapScreen> {
 
     }
 
-
     var map = Container(
         child: StreamBuilder(
           stream: appState.parkSpotManager.active,
           builder: (context, snapshot) {
             return FlutterMap(
-                options: new MapOptions(
-                  center: new LatLng(52.229651, 21.012187),
+                options: MapOptions(
+                  center: whereToZoom,
                   zoom: 12.0,
                 ),
                 layers: [

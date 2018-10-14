@@ -18,12 +18,8 @@ class _TabBarScreenState extends State<TabBarScreen> {
     var screens = [
       BackdropScaffold(
           backpanel: MapScreen(),
-          body: ListView.builder(
-            itemBuilder: (index, context) {
-              return Text("siema");
-            },
-            itemCount: 30,
-          )),
+          body: Container(color: Colors.blue,)
+      ),
       AddScreen(),
       ProfileScreen(),
     ];

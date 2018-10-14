@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:parking/models/location.dart';
 import 'package:parking/models/posting.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -40,7 +41,15 @@ class ParkSpotManager {
   List<Posting> parkSpotList = List<Posting>();
 
   Stream<List<Posting>> get active => _activeController.stream;
-  final _activeController = BehaviorSubject<List<Posting>>(seedValue: null);
+  final _activeController = BehaviorSubject<List<Posting>>(
+      seedValue: <Posting>[Posting(title: "-",
+          price: 0.0,
+          location: Location(lat: 80.1, lng: 30.1, title: "Ulica"))
+      ]
+  );
+
+  Stream<int> get selected => _selectedController.stream;
+  final _selectedController = BehaviorSubject<int>(seedValue: null);
 
   ParkSpotManager({this.reference}) {
     reference.onChildAdded.listen(
@@ -50,6 +59,12 @@ class ParkSpotManager {
           _activeController.add(parkSpotList);
         }
     );
+
+    _selectedController.add(-1);
+  }
+
+  changeSelected(int i) {
+    _selectedController.add(i);
   }
 
 }
