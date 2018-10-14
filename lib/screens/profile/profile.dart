@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:parking/app_state.dart';
 import 'package:parking/models/location.dart';
 import 'package:parking/models/posting.dart';
-import 'package:parking/screens/posted_details/index.dart';
+import 'package:parking/screens/profile/widgets/posted_cell/index.dart';
 import 'package:parking/screens/profile/widgets/rent_cell/index.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -95,16 +95,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           postings.forEach((posting) =>
               cells.add(GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) {
-                            return PostedDetails();
-                          }
-                      )
-                  );
+                  //TODO implement later
+//                  Navigator.push(
+//                      context,
+//                      MaterialPageRoute(
+//                          builder: (context) {
+//                            return PostedDetails();
+//                          }
+//                      )
+//                  );
                 },
-                child: RentCell(posting),
+                child: PostedCell(posting),
               )));
 
           var listView = ListView(

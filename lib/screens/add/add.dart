@@ -114,7 +114,7 @@ class _AddScreenState extends State<AddScreen> {
           ),
           GestureDetector(
             onTap: () async {
-              _location = await Navigator.push(
+              var tmpLocation = await Navigator.push(
                   context,
                   MaterialPageRoute<Location>(
                       builder: (BuildContext context) {
@@ -122,6 +122,10 @@ class _AddScreenState extends State<AddScreen> {
                       }
                   )
               );
+
+              if (tmpLocation != null && tmpLocation != _location) {
+                _location = tmpLocation;
+              }
             },
             child: Text(
               _location != null ? _location.title : "No location selected",

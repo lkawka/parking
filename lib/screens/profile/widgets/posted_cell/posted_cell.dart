@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:parking/models/posting.dart';
 
 class PostedCell extends StatelessWidget {
-  Posting posting;
+  final Posting posting;
 
-  PostedCell({this.posting});
+  PostedCell(this.posting);
 
   @override
   Widget build(BuildContext context) {
-    var row = Row(
+    var row1 = Row(
       children: <Widget>[
         Expanded(
           child: Text(
@@ -23,20 +23,62 @@ class PostedCell extends StatelessWidget {
       ],
     );
 
+    var row2 = Row(
+      children: <Widget>[
+        Icon(Icons.location_on),
+        Container(width: 5.0,),
+        Expanded(
+          child: Text(posting.location.title, overflow: TextOverflow.ellipsis),
+        )
+      ],
+    );
+
+    var rows = Column(
+      children: <Widget>[
+        row1,
+        Container(height: 5.0),
+        row2,
+      ],
+    );
+
+    Image image = Image.asset("assets/car.png", scale: 1.8,);
+    switch (posting.type) {
+      case "BIG":
+        image = Image.asset("assets/truck.png", scale: 1.8,);
+        break;
+      case "MEDIUM":
+        image = Image.asset("assets/trailer.png", scale: 1.8,);
+        break;
+    }
+
+    var superRow = Row(
+      children: <Widget>[
+        image,
+        Container(width: 10.0,),
+        Expanded(
+          child: rows,
+        )
+      ],
+    );
+
     var cell = Container(
-      height: 50.0,
+      padding: EdgeInsets.only(
+          left: 10.0, right: 10.0, top: 10.0, bottom: 10.0),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(5.0))
       ),
-      child: row,
+      child: superRow,
+    );
+
+    var material = Material(
+      child: cell,
     );
 
     var column = Column(
       children: <Widget>[
-        cell,
-        Container(
-          height: 5.0,
-        )
+        material,
+        Container(height: 10.0,)
       ],
     );
 
