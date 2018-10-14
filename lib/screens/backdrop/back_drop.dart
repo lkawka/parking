@@ -151,10 +151,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     AppState appState = AppState.of(context);
     appState.parkSpotManager.selected.listen(
             (selected) {
-          if (flag == 0)
-            flag++;
-          else
-            _controller.fling(velocity: 1.0);
+          if (selected != null && selected != -1) _controller.fling(
+              velocity: 1.0);
         }
     );
     return LayoutBuilder(
