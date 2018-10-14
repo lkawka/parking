@@ -42,15 +42,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget rentedTab() {
     var postings = <Posting>[
-      Posting(title: "Cheap",
-          price: 35.0,
-          location: Location(title: "loc1", lat: 52.210741, lng: 21.011951)),
-      Posting(title: "Free",
-          price: 0.0,
-          location: Location(title: "loc2", lat: 52.226374, lng: 21.000665)),
-      Posting(title: "Available",
+      Posting(title: "On the guarded park!",
+          price: 90.0,
+          location: Location(title: "aleja Róż 1, 00-001 Warszawa",
+              lat: 52.210741,
+              lng: 21.011951)),
+      Posting(title: "Very safe area",
           price: 120.0,
-          location: Location(title: "loc3", lat: 52.253770, lng: 21.001314)),
+          location: Location(title: "Solankowa 13-1, 02-939 Warszawa",
+              lat: 52.226374,
+              lng: 21.000665)),
+      Posting(title: "Very cheap!",
+          price: 40.0,
+          location: Location(
+              title: "DW629, 00-140 Warszawa", lat: 52.253770, lng: 21.001314)),
     ];
 
     var cells = <Widget>[];
