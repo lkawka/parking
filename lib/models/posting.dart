@@ -24,6 +24,10 @@ class Posting {
           title: snapshot.value["locationTitle"],
           lat: snapshot.value["lat"],
           lng: snapshot.value["lng"],
+        ),
+        ocupiedList = Occupied(
+          start: snapshot.value["start"],
+          end: snapshot.value["end"],
         );
 
   toJson() {
@@ -34,6 +38,8 @@ class Posting {
       "locationTitle": location.title,
       "lat": location.lat,
       "lng": location.lng,
+      "start": ocupiedList.start,
+      "end": ocupiedList.end,
     };
   }
 
