@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking/app_state.dart';
 import 'package:parking/models/location.dart';
 import 'package:parking/models/posting.dart';
 import 'package:parking/screens/location/index.dart';
@@ -28,7 +29,8 @@ class _AddScreenState extends State<AddScreen> {
     });
   }
 
-  postPosting() {
+  postPosting(AppState state) {
+
     if (_formKey.currentState.validate() && _location != null) {
       _formKey.currentState.save();
     } else {
@@ -55,7 +57,7 @@ class _AddScreenState extends State<AddScreen> {
         type: type
     );
 
-    //TODO do something with the posting
+    state.parkSpotManager.postNewPosting(posting);
   }
 
   @override
@@ -183,7 +185,9 @@ class _AddScreenState extends State<AddScreen> {
 
     var postButton = RaisedButton(
       child: Text("Post"),
-      onPressed: postPosting,
+      onPressed: () {
+        postPosting(AppState.of(context));
+      },
     );
 
     var listView = ListView(

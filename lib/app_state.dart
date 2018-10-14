@@ -63,6 +63,10 @@ class ParkSpotManager {
     _selectedController.add(-1);
   }
 
+  postNewPosting(Posting posting) {
+    reference.push().set(posting.toJson());
+  }
+
   changeSelected(int i) {
     _selectedController.add(i);
   }

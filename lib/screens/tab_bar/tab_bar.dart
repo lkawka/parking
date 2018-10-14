@@ -4,6 +4,7 @@ import 'package:parking/screens/add/index.dart';
 import 'package:parking/screens/backdrop/index.dart';
 import 'package:parking/screens/map/index.dart';
 import 'package:parking/screens/profile/index.dart';
+import 'package:parking/widgets/info_details/index.dart';
 
 class TabBarScreen extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
     var screens = [
       BackdropScaffold(
           backpanel: MapScreen(),
-          body: Container(color: Colors.blue,)
+        body: InfoDetails(),
       ),
       AddScreen(),
       ProfileScreen(),
