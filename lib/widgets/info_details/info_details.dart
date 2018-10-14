@@ -53,14 +53,14 @@ class InfoDetailsState extends State<InfoDetails> {
             alignment: Alignment.center,
           ),*/
           Align(
-            child: content("Ulica",
+            child: content("Address",
                 Text(widget.posting.location.title,
                   style: TextStyle(fontSize: 18.0),)
             ),
             alignment: Alignment.bottomLeft,
           ),
           content(
-              "Dostępność",
+              "Availability",
               Padding(
                   padding: EdgeInsets.only(top: 6.0),
                   child: Column(
@@ -105,7 +105,7 @@ class InfoDetailsState extends State<InfoDetails> {
                             borderRadius: BorderRadius.all(
                                 Radius.circular(16.0)),
                           ),
-                          child: Text("Zarezerwuj", style: TextStyle(
+                          child: Text("Book", style: TextStyle(
                               color: Colors.white, fontSize: 20.0),),
                         ),
                         onTap: () {
@@ -121,7 +121,7 @@ class InfoDetailsState extends State<InfoDetails> {
                   Padding(
                     padding: EdgeInsets.only(left: 64.0),
                     child: content(
-                      "Od", Material(
+                      "From", Material(
                         color: Colors.white,
                         elevation: 4.0,
                         borderRadius: BorderRadius.all(Radius.circular(32.0)),
@@ -146,7 +146,7 @@ class InfoDetailsState extends State<InfoDetails> {
                   Padding(
                     padding: EdgeInsets.only(left: 16.0),
                     child: content(
-                      "Do", Material(
+                      "To", Material(
                         color: Colors.white,
                         elevation: 4.0,
                         borderRadius: BorderRadius.all(Radius.circular(32.0)),

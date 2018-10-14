@@ -31,9 +31,9 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
   void initState() {
     super.initState();
     if (widget.controller == null) {
-      shouldDisposeController = false;
+      shouldDisposeController = true;
       _controller = AnimationController(
-          vsync: this, duration: Duration(milliseconds: 100), value: 1.0);
+          vsync: this, duration: Duration(milliseconds: 100), value: -1.0);
     } else {
       _controller = widget.controller;
     }
@@ -144,12 +144,17 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     );
   }
 
+  int flag = 0;
+
   @override
   Widget build(BuildContext context) {
     AppState appState = AppState.of(context);
     appState.parkSpotManager.selected.listen(
             (selected) {
-          _controller.fling(velocity: 1.0);
+          if (flag == 0)
+            flag++;
+          else
+            _controller.fling(velocity: 1.0);
         }
     );
     return LayoutBuilder(
