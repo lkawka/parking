@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:parking/models/posting.dart';
 
 class MyMarker extends StatelessWidget {
 
   final isHighlighted;
-  final title;
+  final Posting posting;
   final onTap;
 
-  MyMarker({Key key, this.title = "Free", this.isHighlighted = false, this.onTap});
+  MyMarker({Key key, this.posting, this.isHighlighted = false, this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    Image image = Image.asset("assets/car.png");
+    switch (posting.type) {
+      case "BIG":
+        image = Image.asset("assets/truck.png");
+        break;
+      case "MEDIUM":
+        image = Image.asset("assets/trailer.png");
+        break;
+    }
+
     var marker = Container(
       decoration: BoxDecoration(
         color: isHighlighted ? Colors.white : Colors.white70 ,
@@ -18,9 +29,10 @@ class MyMarker extends StatelessWidget {
       ),
       child: Row(
         children: <Widget>[
-          Image.asset("assets/money-icon.png"),
+          image,
+          Container(width: 5.0,),
           Expanded(
-            child: Text("$title PLN"),
+            child: Text("${posting.price.toInt()} PLN"),
           )
         ],
       ),

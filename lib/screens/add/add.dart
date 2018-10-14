@@ -63,6 +63,7 @@ class _AddScreenState extends State<AddScreen> {
   @override
   Widget build(BuildContext context) {
     var titleField = Container(
+      padding: EdgeInsets.only(left: 15.0, right: 15.0),
       child: TextFormField(
         decoration: InputDecoration(
           labelText: "Title",
@@ -80,6 +81,7 @@ class _AddScreenState extends State<AddScreen> {
     );
 
     var priceField = Container(
+      padding: EdgeInsets.only(left: 15.0, right: 15.0),
       child: TextFormField(
         decoration: InputDecoration(
           labelText: "Price",
@@ -98,6 +100,7 @@ class _AddScreenState extends State<AddScreen> {
     );
 
     var locationField = Container(
+      padding: EdgeInsets.only(left: 15.0, right: 15.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -128,6 +131,7 @@ class _AddScreenState extends State<AddScreen> {
     );
 
     var typeField = Container(
+        padding: EdgeInsets.only(left: 15.0, right: 15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -175,6 +179,7 @@ class _AddScreenState extends State<AddScreen> {
         ));
 
     var infoField = Container(
+      padding: EdgeInsets.only(left: 15.0, right: 15.0),
       child: TextFormField(
         decoration: InputDecoration(labelText: "Info"),
         onSaved: (val) {
@@ -183,39 +188,40 @@ class _AddScreenState extends State<AddScreen> {
       ),
     );
 
-    var postButton = RaisedButton(
-      child: Text("Post"),
-      onPressed: () {
-        postPosting(AppState.of(context));
-      },
+    var postButton = Container(
+      padding: EdgeInsets.only(left: 15.0, right: 15.0),
+      child: RaisedButton(
+        child: Text("Post"),
+        onPressed: () {
+          postPosting(AppState.of(context));
+        },
+        color: Colors.blue,
+        textColor: Colors.white,
+      ),
     );
 
     var listView = ListView(
       children: <Widget>[
-        Container(
-          height: 0.1,
-        ),
         titleField,
         priceField,
         Container(
-          height: 5.0,
+          height: 10.0,
         ),
         locationField,
         Container(
-          height: 5.0,
+          height: 10.0,
         ),
         typeField,
         infoField,
         Container(
-          height: 7.0,
+          height: 15.0,
         ),
         postButton,
+        Container(height: 20.0,),
       ],
     );
 
     var form = Container(
-      padding:
-      EdgeInsets.only(top: 25.0, bottom: 25.0, left: 20.0, right: 20.0),
       child: Form(
         key: _formKey,
         autovalidate: false,
@@ -227,7 +233,7 @@ class _AddScreenState extends State<AddScreen> {
 
     var scaffold = Scaffold(
       appBar: AppBar(
-        title: Text("Add"),
+        title: Text("Add new parking spot"),
       ),
       body: form,
       resizeToAvoidBottomPadding: false,

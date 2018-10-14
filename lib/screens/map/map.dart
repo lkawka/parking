@@ -33,7 +33,7 @@ class _MapScreenState extends State<MapScreen> {
                 isHighlighted: _selectedPosting != null && _selectedPosting == i
                     ? true
                     : false,
-                title: postings[i].price.toInt().toString(),
+                posting: postings[i],
                 onTap: () {
                   setState(() {
                     _selectedPosting = i;
