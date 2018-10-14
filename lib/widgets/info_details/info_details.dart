@@ -204,15 +204,19 @@ class InfoDetailsState extends State<InfoDetails> {
   }
 
   _changeValStart(int val) {
-    setState(() {
-      widget.start = val;
-    });
+    if (val != null) {
+      setState(() {
+        widget.start = val;
+      });
+    }
   }
 
   _changeValEnd(int val) {
-    setState(() {
-      widget.end = val;
-    });
+    if (val != null) {
+      setState(() {
+        widget.end = val;
+      });
+    }
   }
 
   getListOfOccipied() {
