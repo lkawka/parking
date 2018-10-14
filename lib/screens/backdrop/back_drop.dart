@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking/app_state.dart';
 
 class BackdropScaffold extends StatefulWidget {
   final AnimationController controller;
@@ -142,6 +143,12 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
 
   @override
   Widget build(BuildContext context) {
+    AppState appState = AppState.of(context);
+    appState.parkSpotManager.selected.listen(
+            (selected) {
+          _controller.fling(velocity: 1.0);
+        }
+    );
     return LayoutBuilder(
       builder: (context, constraints) {
         return Container(
