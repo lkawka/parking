@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:parking/models/location.dart';
 
 class Posting {
   String key;
@@ -6,24 +7,27 @@ class Posting {
   String title;
   double price;
 
-  double lat;
-  double lng;
+  Location location;
 
-  Posting({this.title, this.price, this.lat, this.lng});
+  Posting({this.title, this.price, this.location});
 
   Posting.fromSnapshot(DataSnapshot snapshot)
       : key = snapshot.key,
         title = snapshot.value["title"],
         price = double.tryParse(snapshot.value["price"].toString()),
-        lat = snapshot.value["lat"],
-        lng = snapshot.value["lng"];
+        location = Location(
+          title: snapshot.value["locationTitle"],
+          lat: snapshot.value["lat"],
+          lng: snapshot.value["lng"],
+        );
 
   toJson() {
     return {
       "title": title,
       "price": price,
-      "lat": lat,
-      "lng": lng,
+      "locationTitle": location.title,
+      "lat": location.lat,
+      "lng": location.lng,
     };
   }
 

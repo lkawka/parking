@@ -25,7 +25,7 @@ class _MapScreenState extends State<MapScreen> {
         markers.add(Marker(
             height: 35.0,
             width: 80.0,
-            point: LatLng(postings[i].lat, postings[i].lng),
+            point: LatLng(postings[i].location.lat, postings[i].location.lng),
             builder: (context) {
               return MyMarker(
                 isHighlighted: _selectedPosting != null && _selectedPosting == i

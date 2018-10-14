@@ -14,7 +14,10 @@ class _AddScreenState extends State<AddScreen> {
 
   String _title;
   double _price;
-  Location _location;
+  Location _location = Location(
+      title: "Startberry, Grochowska 306/308, Warszawa",
+      lat: 52.210777,
+      lng: 21.011922);
   int _radioValue = 0;
   String _info;
 
@@ -74,7 +77,7 @@ class _AddScreenState extends State<AddScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Type",
+            "Location",
             style: TextStyle(fontSize: 17.0),
           ),
           Container(
@@ -91,7 +94,8 @@ class _AddScreenState extends State<AddScreen> {
                   )
               );
             },
-            child: Text(_location != null ? _location.title : "Location",
+            child: Text(
+              _location != null ? _location.title : "No location selected",
               style: TextStyle(fontSize: 17.0),),
           )
         ],
